@@ -294,15 +294,11 @@ document.getElementById("cloakBtn").addEventListener("click", () => {
   link.href = "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico";
 
 });
-  document.addEventListener('keydown', function(event) {
-    // Check if the pressed key is '~' (tilde)
-    if (event.key === '~') {
-        // Open about:blank in a new tab
-        window.open('about:blank', '_blank');
-        
-        // OR: Redirect current page to about:blank
-        // location.replace('about:blank');
-    }
+document.addEventListener('keydown', function(event) {
+  if (event.key === '`' || event.key === '~') {
+    document.body.innerHTML = '';
+    location.replace('about:blank');
+  }
 });
 </script>
   
