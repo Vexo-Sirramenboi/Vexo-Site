@@ -283,7 +283,7 @@ animateParticles();
 
 // SAFE MANUAL TOGGLE
 document.getElementById("cloakBtn").addEventListener("click", () => {
-  document.title = "Google Docs";
+  document.title = "Google Classroom";
 
   let link = document.querySelector("link[rel~='icon']");
   if (!link) {
@@ -291,7 +291,7 @@ document.getElementById("cloakBtn").addEventListener("click", () => {
     link.rel = 'icon';
     document.head.appendChild(link);
   }
-  link.href = "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico";
+  link.href = "https://edu.google.com/images/svg/gsuite-icons/classroom.svg";
 
 });
 document.addEventListener('keydown', function(event) {
