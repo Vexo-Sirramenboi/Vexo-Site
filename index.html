@@ -1,54 +1,27 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<link rel="icon" type="image/x-icon" href="Vexo-icon.ico">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Vexo Site</title>
-<!-- Button on your main GitHub Pages site -->
-<button onclick="openCloaked()">Open Site in about:blank</button>
 
-<script>
-function openCloaked() {
-    // 1. Open a new about:blank window
-    var win = window.open();
-    win.document.title = "Google Classroom"; // Optional: Change the tab title
-    
-    // 2. Clear default margins for a clean look
-    var body = win.document.body;
-    body.style.margin = "0";
-    body.style.height = "100vh";
-    body.style.overflow = "hidden";
-
-    // 3. Create the Button for the top-left corner
-    var btn = win.document.createElement('button');
-    btn.innerHTML = "Exit Page";
-    btn.style.position = "fixed";
-    btn.style.top = "10px";
-    btn.style.left = "10px";
-    btn.style.zIndex = "9999";
-    btn.onclick = function() { win.close(); }; // Close the tab when clicked
-
-    // 4. Create the Iframe to show your GitHub website
-    var iframe = win.document.createElement('iframe');
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-    iframe.src = window.location.href; // Loads your current GitHub URL
-
-    // 5. Add both to the new about:blank page
-    body.appendChild(btn);
-    body.appendChild(iframe);
-}
-</script>
+<link rel="icon" type="image/x-icon" href="Vexo-icon.ico">
 
 <style>
+
+/* =========================
+BODY
+========================= */
+
 body {
-<button id="cloak-btn" class="top-right-btn">Cloak Tab</button>
 margin: 0;
 padding: 40px;
 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-background-color: #1a1a1a;
+background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
 color: #e0e0e0;
 display: flex;
 flex-direction: column;
@@ -56,8 +29,11 @@ align-items: center;
 min-height: 100vh;
 overflow-x: hidden;
 position: relative;
-background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
 }
+
+/* =========================
+PARTICLES
+========================= */
 
 canvas#particles {
 position: fixed;
@@ -68,6 +44,10 @@ height: 100%;
 z-index: 0;
 pointer-events: none;
 }
+
+/* =========================
+TEXT
+========================= */
 
 h1, h3 {
 position: relative;
@@ -83,11 +63,14 @@ text-shadow: 0 0 8px #00ffa3;
 }
 
 h3 {
-font-size: 1.2em;
+font-size: 1.1em;
 font-weight: normal;
 color: #a3ffeb;
-margin-bottom: 25px;
 }
+
+/* =========================
+LINKS
+========================= */
 
 .links {
 position: relative;
@@ -96,14 +79,14 @@ display: grid;
 gap: 15px;
 max-width: 700px;
 width: 100%;
+margin-top: 20px;
 }
 
-a {
+.links a {
 display: block;
 text-align: center;
 padding: 16px 20px;
-font-size: 1.2em;
-font-weight: 500;
+font-size: 1.1em;
 text-decoration: none;
 border-radius: 8px;
 color: #00ffa3;
@@ -113,50 +96,186 @@ backdrop-filter: blur(5px);
 transition: all 0.3s ease;
 }
 
-a:hover {
+.links a:hover {
 transform: translateY(-2px);
 background: rgba(0,255,163,0.1);
 box-shadow: 0 4px 12px rgba(0,255,163,0.2);
 }
 
-#cloakBtn {
+/* =========================
+TOP BUTTONS
+========================= */
+
+.top-buttons {
 position: fixed;
 top: 15px;
 right: 15px;
-z-index: 2;
+display: flex;
+gap: 10px;
+z-index: 9999;
+}
+
+.top-buttons button {
 padding: 10px 14px;
 border-radius: 6px;
 border: none;
 background: rgba(0,255,163,0.15);
 color: #00ffa3;
 cursor: pointer;
+transition: 0.2s;
 }
 
-@media (max-width: 600px) {
-body { padding: 20px; }
-h1 { font-size: 2.2em; }
-h3 { font-size: 1em; }
-a { font-size: 1.1em; padding: 14px 16px; }
+.top-buttons button:hover {
+background: rgba(0,255,163,0.25);
 }
+
+/* =========================
+SETTINGS PANEL
+========================= */
+
+#settingsPanel {
+display: none;
+position: fixed;
+top: 70px;
+right: 15px;
+width: 260px;
+padding: 20px;
+background: #111;
+border-radius: 10px;
+border: 1px solid rgba(0,255,163,0.3);
+box-shadow: 0 0 15px rgba(0,255,163,0.2);
+z-index: 99999;
+}
+
+#settingsPanel h3 {
+margin-top: 0;
+color: #00ffa3;
+}
+
+.setting-row {
+margin-bottom: 15px;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+body {
+padding: 20px;
+}
+
+h1 {
+font-size: 2.2em;
+}
+
+.links a {
+font-size: 1em;
+padding: 14px;
+}
+
+.top-buttons {
+flex-wrap: wrap;
+justify-content: flex-end;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<button id="cloakBtn">Docs Cloaker</button>
+<!-- =========================
+TOP BUTTONS
+========================= -->
+
+<div class="top-buttons">
+
+<button onclick="openCloaked()">
+Open Site
+</button>
+
+<button id="cloakBtn">
+Docs Cloaker
+</button>
+
+<button id="settingsBtn">
+⚙ Settings
+</button>
+
+</div>
+
+<!-- =========================
+SETTINGS PANEL
+========================= -->
+
+<div id="settingsPanel">
+
+<h3>Settings</h3>
+
+<div class="setting-row">
+<label>
+<input type="checkbox" id="persistentCloak">
+ Persistent about:blank cloak
+</label>
+</div>
+
+<div class="setting-row">
+<button id="disableCloakBtn">
+Disable Cloak
+</button>
+</div>
+
+</div>
+
+<!-- =========================
+PARTICLES
+========================= -->
 
 <canvas id="particles"></canvas>
 
-<h1>Vexo SITE</h1>
-<h3>Link domain list for unblock stuff</h3>
-<h3>PANIC KEY ~</h3>
-<h3>WE DO NOT OWN ANY OF THESE WEBSITES NOR DO WE TAKE CREDIT FOR THEM.</h3>
+<!-- =========================
+PAGE CONTENT
+========================= -->
 
-<!-- PROXY DISCLAIMER -->
-<div style="position: relative; z-index: 1; margin-bottom: 15px; padding: 12px; border: 1px solid rgba(255, 100, 100, 0.5); border-radius: 8px; background: rgba(255, 0, 0, 0.05); color: #ff6666; font-size: 1em; text-align: center; text-shadow: 0 0 4px #ff6666;">
-⚠️ Proxy Disclaimer: These links may lead to unsafe or unverified websites. 
-Use them at your own risk. We do not own or endorse any of these proxies.
+<h1>Vexo SITE</h1>
+
+<h3>Link domain list</h3>
+
+<h3>PANIC KEY ~</h3>
+
+<h3>
+WE DO NOT OWN ANY OF THESE WEBSITES.
+</h3>
+
+<!-- DISCLAIMER -->
+
+<div style="
+position: relative;
+z-index: 1;
+margin-bottom: 15px;
+padding: 12px;
+border: 1px solid rgba(255, 100, 100, 0.5);
+border-radius: 8px;
+background: rgba(255, 0, 0, 0.05);
+color: #ff6666;
+font-size: 1em;
+text-align: center;
+">
+
+⚠️ External links may be unsafe.
+Use at your own risk.
+
 </div>
+
+<!-- =========================
+LINKS
+========================= -->
+
+<div class="links">
 
 <a href="https://saturn.tecnopoint.ru/" target="_blank">Proxy 1</a>
 <a href="https://rammer-nana.alyaf.com/" target="_blank">Proxy 2</a>
@@ -264,81 +383,416 @@ Use them at your own risk. We do not own or endorse any of these proxies.
 <a href="https://matter.is-a.software.cdn.cloudflare.net/" target="_blank">Proxy 98</a>
 <a href="https://study-with.b-cdn.net/" target="_blank">Proxy 99</a>
 <a href="https://thoughts.forwardersoft.com/" target="_blank">Proxy 100</a>
+
+</div>
+
 <script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+
+/* =========================
+ABOUT:BLANK CLOAK
+========================= */
+
+function openCloaked() {
+
+localStorage.setItem(
+"cloakEnabled",
+"true"
+);
+
+var win = window.open();
+
+if (!win) {
+alert("Popup blocked.");
+return;
+}
+
+win.document.title =
+"Google Classroom";
+
+var body = win.document.body;
+
+body.style.margin = "0";
+body.style.height = "100vh";
+body.style.overflow = "hidden";
+
+/* EXIT BUTTON */
+
+var btn =
+win.document.createElement("button");
+
+btn.innerHTML = "Exit Page";
+
+btn.style.position = "fixed";
+btn.style.top = "10px";
+btn.style.left = "10px";
+btn.style.zIndex = "9999";
+btn.style.padding = "10px";
+btn.style.border = "none";
+btn.style.borderRadius = "6px";
+btn.style.cursor = "pointer";
+
+btn.onclick = function() {
+
+localStorage.setItem(
+"cloakEnabled",
+"false"
+);
+
+sessionStorage.removeItem(
+"cloakOpened"
+);
+
+win.close();
+
+};
+
+/* IFRAME */
+
+var iframe =
+win.document.createElement("iframe");
+
+iframe.style.width = "100%";
+iframe.style.height = "100%";
+iframe.style.border = "none";
+
+iframe.src =
+location.origin + location.pathname;
+
+/* ADD ELEMENTS */
+
+body.appendChild(btn);
+body.appendChild(iframe);
+
+}
+
+/* =========================
+SETTINGS PANEL
+========================= */
+
+const settingsBtn =
+document.getElementById(
+"settingsBtn"
+);
+
+const settingsPanel =
+document.getElementById(
+"settingsPanel"
+);
+
+settingsBtn.addEventListener(
+"click",
+() => {
+
+settingsPanel.style.display =
+settingsPanel.style.display ===
+"block"
+? "none"
+: "block";
+
+}
+);
+
+/* =========================
+PERSISTENT TOGGLE
+========================= */
+
+const persistentToggle =
+document.getElementById(
+"persistentCloak"
+);
+
+persistentToggle.checked =
+localStorage.getItem(
+"persistentMode"
+) === "true";
+
+persistentToggle.addEventListener(
+"change",
+() => {
+
+localStorage.setItem(
+"persistentMode",
+persistentToggle.checked
+);
+
+}
+);
+
+/* =========================
+DISABLE BUTTON
+========================= */
+
+document.getElementById(
+"disableCloakBtn"
+).addEventListener(
+"click",
+() => {
+
+localStorage.setItem(
+"cloakEnabled",
+"false"
+);
+
+sessionStorage.removeItem(
+"cloakOpened"
+);
+
+alert("Cloak disabled.");
+
+}
+);
+
+/* =========================
+AUTO RESTORE FIX
+========================= */
+
+window.addEventListener(
+"load",
+() => {
+
+if (window.self !== window.top) {
+return;
+}
+
+const persistent =
+localStorage.getItem(
+"persistentMode"
+) === "true";
+
+const enabled =
+localStorage.getItem(
+"cloakEnabled"
+) === "true";
+
+if (persistent && enabled) {
+
+setTimeout(() => {
+
+if (
+!sessionStorage.getItem(
+"cloakOpened"
+)
+) {
+
+sessionStorage.setItem(
+"cloakOpened",
+"true"
+);
+
+openCloaked();
+
+}
+
+}, 500);
+
+}
+
+}
+);
+
+/* =========================
+DOCS CLOAKER
+========================= */
+
+document.getElementById(
+"cloakBtn"
+).addEventListener(
+"click",
+() => {
+
+document.title =
+"Google Classroom";
+
+let link =
+document.querySelector(
+"link[rel~='icon']"
+);
+
+if (!link) {
+
+link =
+document.createElement("link");
+
+link.rel = "icon";
+
+document.head.appendChild(link);
+
+}
+
+link.href =
+"https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico";
+
+}
+);
+
+/* =========================
+PANIC KEY
+========================= */
+
+document.addEventListener(
+"keydown",
+function(event) {
+
+if (
+event.key === "`" ||
+event.key === "~"
+) {
+
+document.body.innerHTML = "";
+
+location.replace(
+"about:blank"
+);
+
+}
+
+}
+);
+
+/* =========================
+PARTICLES
+========================= */
+
+const canvas =
+document.getElementById(
+"particles"
+);
+
+const ctx =
+canvas.getContext("2d");
+
 let particlesArray = [];
 
 function resizeCanvas() {
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+
+canvas.width =
+window.innerWidth;
+
+canvas.height =
+window.innerHeight;
+
 }
-window.addEventListener('resize', resizeCanvas);
+
+window.addEventListener(
+"resize",
+resizeCanvas
+);
+
 resizeCanvas();
 
 class Particle {
+
 constructor() {
-this.x = Math.random() * canvas.width;
-this.y = Math.random() * canvas.height;
-this.size = Math.random() * 3 + 1;
-this.speedX = (Math.random() - 0.5) * 0.5;
-this.speedY = (Math.random() - 0.5) * 0.5;
+
+this.x =
+Math.random() *
+canvas.width;
+
+this.y =
+Math.random() *
+canvas.height;
+
+this.size =
+Math.random() * 3 + 1;
+
+this.speedX =
+(Math.random() - 0.5) * 0.5;
+
+this.speedY =
+(Math.random() - 0.5) * 0.5;
+
 }
 
 update() {
+
 this.x += this.speedX;
 this.y += this.speedY;
 
-if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+if (
+this.x < 0 ||
+this.x > canvas.width
+)
+this.speedX *= -1;
+
+if (
+this.y < 0 ||
+this.y > canvas.height
+)
+this.speedY *= -1;
+
 }
 
 draw() {
-ctx.fillStyle = "rgba(200,200,255,0.3)";
+
+ctx.fillStyle =
+"rgba(200,200,255,0.3)";
+
 ctx.beginPath();
-ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+ctx.arc(
+this.x,
+this.y,
+this.size,
+0,
+Math.PI * 2
+);
+
 ctx.fill();
-}
+
 }
 
-function initParticles(count = 60) {
-particlesArray = [];
-for (let i = 0; i < count; i++) {
-particlesArray.push(new Particle());
 }
+
+function initParticles(
+count = 60
+) {
+
+particlesArray = [];
+
+for (
+let i = 0;
+i < count;
+i++
+) {
+
+particlesArray.push(
+new Particle()
+);
+
+}
+
 }
 
 function animateParticles() {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-particlesArray.forEach(p => { p.update(); p.draw(); });
-requestAnimationFrame(animateParticles);
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+particlesArray.forEach(
+p => {
+
+p.update();
+p.draw();
+
+}
+);
+
+requestAnimationFrame(
+animateParticles
+);
+
 }
 
 initParticles();
+
 animateParticles();
 
-// SAFE MANUAL TOGGLE
-document.getElementById("cloakBtn").addEventListener("click", () => {
-document.title = "Google Docs";
-document.title = "Google Classroom";
-
-let link = document.querySelector("link[rel~='icon']");
-if (!link) {
-link = document.createElement('link');
-link.rel = 'icon';
-document.head.appendChild(link);
-}
-link.href = "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico";
-link.href = "https://edu.google.com/images/svg/gsuite-icons/classroom.svg";
-
-});
-document.addEventListener('keydown', function(event) {
-if (event.key === '`' || event.key === '~') {
-document.body.innerHTML = '';
-location.replace('about:blank');
-}
-});
 </script>
 
 </body>
 </html>
+```
